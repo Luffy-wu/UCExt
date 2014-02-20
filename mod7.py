@@ -10,23 +10,24 @@ def convertMe(string):
     try:
         number = int(string)
         print "converted %s to %d" % (string, number)
-    except:
+    except ValueError:
         print("%r cannot be converted to an integer.") % (string)
 
 
 convertMe("4ssss")
-convertMe("745")
+convertMe("-745")
 
 #alternate solution
 
 def convertMe2(string):
-    if string.isdigit():      #if the guess is a number, go into the game
+    if string.isdigit():
         number = int(string)
         print "converted %s to %d" % (string, number)
     else:
         print("%r cannot be converted to an integer.") % (string)
 
-convertMe2("dfdf78s")
+convertMe2("dfdf7 8s")
+convertMe("-85")
 
 """
 The input function will read a single line of text from the terminal. If you wanted to read several 
