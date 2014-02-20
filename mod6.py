@@ -9,8 +9,8 @@ the words in the file.). """
 def filecounts(filename):
     try: 
         f = open(filename) 
-    except IOError: 
-        print("Can't find %s" %  filename)
+    except IOError, e: 
+        print("Unable to open file for reading %s: %s" % (filename, e))
 
     text = f.readlines()
     f.close()

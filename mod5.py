@@ -49,8 +49,9 @@ print "\nProblem 2:", big
 filename = './short.txt' 
 try: 
     f = open(filename) 
-except IOError: 
-    print("Can't find %s" %  filename)
+
+except IOError, e: 
+    print("Unable to open file for reading %s: %s" % (filename, e))
 
 text = f.readlines()
 f.close()
@@ -74,8 +75,8 @@ doesn't count characters on any line that begins with a pound sign (#).
 filename = './short.txt' 
 try: 
     f = open(filename) 
-except IOError: 
-    print("Can't find %s" %  filename)
+except IOError, e: 
+    print("Unable to open file for reading %s: %s" % (filename, e))
 
 text = f.readlines()
 f.close()
