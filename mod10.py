@@ -29,7 +29,7 @@ for root, dirs, files in  os.walk(dirname):
     for singlefile in files:
         if not ext_dict.get(singlefile[-4:]): #if ext is not in the dict, add it with an empty list as a value
             ext_dict[singlefile[-4:]] = []
-        ext_dict[(singlefile[-4:])] += [(singlefile, os.path.getsize(os.path.join(root, singlefile)))]
+        ext_dict[(singlefile[-4:])] += [(singlefile, os.path.getsize(os.path.join(root, singlefile)))] #add file and filesize as keys
 
 #pprint.pprint(ext_dict)
 #dict looks like:
