@@ -12,26 +12,42 @@ the selected directory.
 """
 
 import os
+import sys
 import pprint
-total = 0
 
-# add file read input stuff here
+dirname = raw_input("please enter a dir: ")
 
-ext_dict = {}
+if not os.path.isdir(dirname):
+    print "can't find directory", dirname
+    sys.exit()
+else:
+    print "reading directory", dirname, "\n"
 
-for root, dirs, files in  os.walk('IMAGES'):
+ext_dict = {} #get a dict with all the different file extensions as keys
+
+for root, dirs, files in  os.walk(dirname):
     for singlefile in files:
-        if not ext_dict.get(singlefile[-4:]): #if ext is not in the dict, add it
+        if not ext_dict.get(singlefile[-4:]): #if ext is not in the dict, add it with an empty list as a value
             ext_dict[singlefile[-4:]] = []
         ext_dict[(singlefile[-4:])] += [(singlefile, os.path.getsize(os.path.join(root, singlefile)))]
 
-             
+#pprint.pprint(ext_dict)
+#dict looks like:
+# {'.gif': [('02AerialDetail.gif', 242353),
+#           ('10-DJ-50x50.gif', 5645),
+#           ('4F4.gif', 1053),
+#           ('Aerial.gif', 183501),
+#           ('BFF_HipHopBooty1_6_14.gif', 75832),
 
+for ext in ext_dict.keys():
+    totalsize = 0
+    avg = 1
+    for singlefile,size in ext_dict[ext]:
+        totalsize += size
+        avg = totalsize/len(ext_dict[ext])
+    print "TOTAL  NUMBER  OF", ext, "IS", len(ext_dict[ext]) # .gif 14
+    print "AVG  FILESIZE FOR", ext, "IS", avg
+    print "SMALLEST FILE FOR", ext, "IS", sorted(ext_dict[ext],key=lambda x:x[1])[0][1]
+    print "LARGEST  FILE FOR", ext, "IS", sorted(ext_dict[ext],key=lambda x:x[1])[-1][1] 
+    print "\n"  
 
-pprint.pprint(ext_dict)
-
-
-
-        #if os.path.getsize(os.path.join(root, singlefile)) > 0:
-            # total += 1
-            #print singlefile, os.path.getsize(os.path.join(root, singlefile))
