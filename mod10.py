@@ -9,6 +9,8 @@ directory (folder) and then finds the extension of each file. Then, for each ext
 of files with that extension and the minimum, average, and maximum size for files with that extension in 
 the selected directory. 
 
+os.path.splitext() for getting ext
+
 """
 
 import os
@@ -27,11 +29,11 @@ ext_dict = {} #get a dict with all the different file extensions as keys
 
 for root, dirs, files in  os.walk(dirname):
     for singlefile in files:
-        if not ext_dict.get(singlefile[-4:]): #if ext is not in the dict, add it with an empty list as a value
-            ext_dict[singlefile[-4:]] = []
-        ext_dict[(singlefile[-4:])] += [(singlefile, os.path.getsize(os.path.join(root, singlefile)))] #add file and filesize as keys
+        if not ext_dict.get(os.path.splitext(singlefile)[1]): #if ext is not in the dict, add it with an empty list as a value
+            ext_dict[os.path.splitext(singlefile)[1]] = []
+        ext_dict[(os.path.splitext(singlefile)[1])] += [(singlefile, os.path.getsize(os.path.join(root, singlefile)))] #add file and filesize as keys
 
-#pprint.pprint(ext_dict)
+pprint.pprint(ext_dict.keys())
 #dict looks like:
 # {'.gif': [('02AerialDetail.gif', 242353),
 #           ('10-DJ-50x50.gif', 5645),
